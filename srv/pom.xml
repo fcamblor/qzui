@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>quartz-ui</groupId>
     <artifactId>quartz-ui</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>quartz-ui</name>
 
@@ -16,6 +14,24 @@
         <restx.version>0.31.1</restx.version>
         <project.war.resources.directory>../ui/dist</project.war.resources.directory>
     </properties>
+
+    <scm>
+        <connection>scm:git:git@github.com:fcamblor/qzui.git</connection>
+        <developerConnection>scm:git:git@github.com:fcamblor/qzui.git</developerConnection>
+        <url>git@github.com:fcamblor/qzui</url>
+      <tag>HEAD</tag>
+  </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>4sh.artifactory.write</id>
+            <url>http://repo.4sh.fr/artifactory/ext-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>4sh.artifactory.write</id>
+            <url>http://repo.4sh.fr/artifactory/ext-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -114,6 +130,27 @@
                         </resource>
                     </webResources>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <!--<pushChanges>false</pushChanges>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.restx</groupId>
+                <artifactId>restx-maven-plugin</artifactId>
+                <version>0.1</version>
+                <executions>
+                    <execution>
+                        <id>restx-archive</id>
+                        <goals>
+                            <goal>archive</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
